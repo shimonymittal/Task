@@ -26,20 +26,37 @@
 #### Semi-Supervised Evaluation
 ##### Approach:
 Semi-supervised learning framework leverages both the labelled references and the structure of the unlabelled data.
-1. **Manifold Learning and Embedding Visualization**
+1. Manifold Learning and Embedding Visualization
 First, I'll analyze the feature space to understand how well the extractor separates different document types:
 - Apply dimensionality reduction (PCA or t-SNE) to visualize the 256-dimensional vectors in 2D/3D.
 - Plot reference documents as reference points in this space.
 - Examine if documents naturally form distinct clusters around their references.
 - Quantify the quality of separation using neighborhood statistics.
 
-2. **Pseudo-Labelling with Confidence Thresholds**
+2. Pseudo-Labelling with Confidence Thresholds
 - For each unlabelled document, calculate similarity to all reference documents.
 - Assign a pseudo-label only if the highest similarity exceeds a confidence threshold
 - Leave ambiguous documents (below threshold) as "uncertain".
 - Continuously iterate the threshold to optimum the precision-coverage tradeoff.
 
 ##### Evaluation Metrics:
+Since we lack ground truth for most documents, we can consider:
+1. Consistency-based metrics:
+- Apply small perturbations to feature vectors and check for label consistency.
+- For each document, check if its nearest neighbors got same label.
+- If multiple images of the same document are existing, all should be classified with same label.
+
+2. Active Learning Simulation
+To estimate classification accuracy without extensive manual labelling:
+- Identify the most informative documents for manual review using sampling maybe.
+- Select documents at decision boundaries between clusters.
+- Use this small labelled set to estimate overall accuracy.
+
+3. Adversarial Evaluation
+Test the robustness of the feature extractor:
+- Generate synthetic variations of reference documents (rotation, cropping, lighting changes)
+- Check how consistently these augmented dacuments are classified.
+- This could help identify potential weaknesses in the feature extraction process.
 
 
 ##### Limitations and Trade-offs:
