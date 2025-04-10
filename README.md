@@ -25,9 +25,36 @@
 ### Method 2: Medium
 #### Semi-Supervised Evaluation
 ##### Approach:
+Semi-supervised learning framework leverages both the labelled references and the structure of the unlabelled data.
+1. **Manifold Learning and Embedding Visualization**
+First, I'll analyze the feature space to understand how well the extractor separates different document types:
+- Apply dimensionality reduction (PCA or t-SNE) to visualize the 256-dimensional vectors in 2D/3D.
+- Plot reference documents as reference points in this space.
+- Examine if documents naturally form distinct clusters around their references.
+- Quantify the quality of separation using neighborhood statistics.
+
+2. **Pseudo-Labelling with Confidence Thresholds**
+- For each unlabelled document, calculate similarity to all reference documents.
+- Assign a pseudo-label only if the highest similarity exceeds a confidence threshold
+- Leave ambiguous documents (below threshold) as "uncertain".
+- Continuously iterate the threshold to optimum the precision-coverage tradeoff.
+
 ##### Evaluation Metrics:
+
+
 ##### Limitations and Trade-offs:
+2.	**Threshold selection challenge**: Setting optimal confidence thresholds can be difficult as lot of tuning required.
+3.	**Computational complexity**: Dimensionality reduction and neighbourhood analysis can be computationally expensive.
+4.	**New document problem**: New document types with no reference will not be properly evaluated.
+   
 ##### Future improvement:
+1.	**Incremental learning**: Continuously update reference set with high-confidence examples
+2.	**Hierarchical classification**: Group similar document types and create a two-stage classification process.
+3.	**Ensemble of distance metrics**: Combine multiple similarity measures for more robust evaluation.
+4.	**Contrastive learning**: Fine-tune the feature extractor using pairs of similar/dissimilar documents.
+5.	**Explainability tools**: Develop methods to understand which regions of documents contribute most to classification.
+6.	**Anomaly detection**: Implement dedicated methods to identify potentially fraudulent documents
+
 
 ### Method 3: Basic
 #### Baseline classification system
