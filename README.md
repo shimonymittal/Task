@@ -47,7 +47,14 @@
 4. Feature Drift Score 
 
 ##### Limitations and Trade-offs:
+1. Few-Shot  model performance can degrad for highly similar document types.
+2. Single reference may not capture intra-class variations.
+3. TTA  needs careful threshold tuning for drift detection.
+4. In Vector DB, FAISS requires periodic re-indexing for new references.
+
 ##### Future improvement:
+1. **Multimodal RAG**: We can think of incorporating OCR text with image features.
+2. **Online Learning**: We can gradually update reference set with verified predictions.
 
 ### Method 2: Medium
 #### Semi-Supervised Evaluation
