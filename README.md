@@ -16,9 +16,31 @@
 ## Approach:
 
 ### Method 1: Advance
-#### 
+#### Combination of Few-Shot Learning with CLIP (Vision Transformer) + Test-Time Adaptation (TTA) + Vector Database (FAISS/Qdrant)
+
 ##### Approach:
+**Few-Shot Learning with CLIP (Vision Transformer)**
+**Chosen**: It classifies documents using just one reference image per category as it is pretrained on diverse image data, so it generalizes well with less labels.
+**Test-Time Adaptation (TTA) for Drift Detection**
+**Chosen**:Makes sure to fix the drop in performance of the feature extractor before going to production.
+**Vector Database (FAISS/Qdrant) for Scalable Search**
+**Chosen**: Quickly find the closest reference vector among millions of documents.
+
+1. Use the pretrained ViT to encode the labelled reference images to vectors.
+2. Store these vectors as "prototypes" (one per document type) in FAISS/Qdrant.
+3. Now take the unlabeled image, compute the CLIP vector
+4. Compare it to all prototypes using FAISS search.
+5. Assign the label of the closest prototype.
+6. Track feature drift with TTA, it periodically compares new vectors to the baseline using KL divergence or Mahalanobis distance.
+7. If drift is detected, fine-tune the feature extractor on new unlabeled data using Tent. It can update the model layers during inference. 
+
 ##### Evaluation Metrics:
+
+1. Cosine Similarity Score
+2. Top-1 Accuracy
+3. FAISS/Qdrant benchmark tools
+4. Feature Drift Score 
+
 ##### Limitations and Trade-offs:
 ##### Future improvement:
 
