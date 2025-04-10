@@ -20,10 +20,15 @@
 
 ##### Approach:
 **Few-Shot Learning with CLIP (Vision Transformer)**
+
 **Chosen**: It classifies documents using just one reference image per category as it is pretrained on diverse image data, so it generalizes well with less labels.
+
 **Test-Time Adaptation (TTA) for Drift Detection**
+
 **Chosen**:Makes sure to fix the drop in performance of the feature extractor before going to production.
+
 **Vector Database (FAISS/Qdrant) for Scalable Search**
+
 **Chosen**: Quickly find the closest reference vector among millions of documents.
 
 1. Use the pretrained ViT to encode the labelled reference images to vectors.
