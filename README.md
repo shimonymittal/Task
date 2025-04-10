@@ -16,7 +16,19 @@
 ## Approach:
 
 ### Method 1: Advance
+#### 
+##### Approach:
+##### Evaluation Metrics:
+##### Limitations and Trade-offs:
+##### Future improvement:
+
 ### Method 2: Medium
+#### Semi-Supervised Evaluation
+##### Approach:
+##### Evaluation Metrics:
+##### Limitations and Trade-offs:
+##### Future improvement:
+
 ### Method 3: Basic
 #### Baseline classification system
 ##### Approach:
